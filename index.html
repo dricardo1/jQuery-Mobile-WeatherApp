@@ -10,11 +10,13 @@
 
 	<link href='http://fonts.googleapis.com/css?family=Cagliostro' rel='stylesheet' type='text/css'/>
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
-	<!--<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
-	<link rel="stylesheet" type="text/css" href="css/drd.css">-->
+	
+	<link rel="stylesheet" type="text/css" href="css/drd.css">
 	<link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons.min.css">
+	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+	<script type="text/javascript" src="js/text.js"></script>
 	
 
 	<script type="text/javascript">
@@ -142,11 +144,24 @@
 	<div data-role="content" class="content">
 		<h1>What's down for later today&#133;</h1>
 		<p id="hourly_summary"class="icon" data-icon="B">Partly Cloudy</p>
-		<blockquote><h1>Oh honey, here's what Coco Chanel thinks you should wear:</h1>
-		<p>A down jacket, a nice knit scarf, a beanie, yoga pants, and those cute fur-topped boots you've been dying to wear. Work it!</p><h2>A little birdie tells me&#133;</h2><p>Pumpkin spice makes everything nice! Wear a warm-brown/cinnamon palette with a splash of blueberry today.</p></blockquote>
+		<blockquote><h1><span id="advisor">WeatherWear</span>should be wearing this today:</h1>
+		<p id="wearMessage"></p><p id="outfitImg" ></p><p>Or try this: <br><span id="outfit" ></span> </p></p><h2>A little birdie once told me&#133;</h2><p id="hintMessage"></p></blockquote>
 	</div>
 </div>
- 
+ <!-- <script type="text/javascript">
+ 	$('#outfitImg').append($('<img>', { 
+    src : "images/1.jpg", 
+    width : 200, 
+    height : 200, 
+    alt : "Test Image", 
+    title : "Test Image"
+}));
+ </script> -->
+
+ <script type="text/javascript">
+ 	var images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg'];
+ 	$('<img class="image-wrap" src="images/' + images[Math.floor(Math.random() * images.length)] + '">').appendTo('#outfitImg').width(200).height(200);
+ </script>
 
 </body>
 
