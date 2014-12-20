@@ -54,9 +54,8 @@
 			var latlng = cityCoords.coords.latitude + "," + cityCoords.coords.longitude;
 
 			// ****** PLEASE NOTE *********
-			// Register for an API key at: https://api.forecast.io/
-			// And replace it in the string below
-			// Without it the app will not work
+			//AJAX WITH JSONP REQUEST TO FORECAST.IO NOT FOR PRODUCTION: Exposes API Key. //When hosted to "WeatherWear.com" write a proxy service for Ajax to be used to //communicate with our server, which then requests json from forecast.io			
+
 			var forecastURL = "https://api.forecast.io/forecast/d42b0d702cd1aad397a7463cdd446227/"+latlng;
 
 			$.ajax({
@@ -78,6 +77,7 @@
 			    }
 			});
 
+
 		}
 
 		function loadCity(city){
@@ -91,9 +91,26 @@
 				}
 
 			} else {
-				loadWeather(cities[city.toLowerCase()]);
-			}
+				loadWeather(cities[city.toLowerCase()]);							
 
+				$.getScript( "js/text.js" )
+				  .done(function( script, textStatus ) {
+				  	chooseAdvisor();				
+				  	console.log( textStatus );
+				    })				  
+				  .fail(function( jqxhr, settings, exception ) {
+				    $( "div.log" ).text( "Triggered ajaxError handler." );
+				});
+
+				$.getScript( "js/text.js" )
+				  .done(function( script, textStatus ) {
+				  	chooseOutfit();					
+				  	console.log( textStatus );
+				    })
+				  .fail(function( jqxhr, settings, exception ) {
+				    $( "div.log" ).text( "Triggered ajaxError handler." );
+				}); 
+			}
 		}
 
 		function loadDefaultCity(){
@@ -102,11 +119,13 @@
 
 		$(document).ready(function(){
 			loadCity("New York");
-
+			
 			$("a.city").bind("click",function(){
 				loadCity($(this).html());
 			});
 		});
+
+
 
 	</script>
 
@@ -141,14 +160,21 @@
 		<p id="current_summary">Partly Cloudy</p>
 		<p id="location">Current Location</p> 
 	</div>
-	<div data-role="content" class="content">
+	<div data-role="content" id="fadeIn" class="content">
 		<h1>What's down for later today&#133;</h1>
 		<p id="hourly_summary"class="icon" data-icon="B">Partly Cloudy</p>
 		<blockquote><h1><span id="advisor">WeatherWear</span>should be wearing today:</h1>
 		<p id="wearMessage"></p><p id="outfitImg" ></p><p>Or try this: <br><span id="outfit" ></span> </p></p><h2>A little birdie once told me&#133;</h2><p id="hintMessage"></p></blockquote>
 	</div>
 </div>
- <!-- <script type="text/javascript">
+
+<!-- <script>
+$( document ).ready(function() {
+  $( "fadeIn" ).fadeIn( "slow" );
+});
+</script>
+
+ <script type="text/javascript">
  	$('#outfitImg').append($('<img>', { 
     src : "images/1.jpg", 
     width : 200, 
@@ -158,10 +184,13 @@
 }));
  </script> -->
 
- <script type="text/javascript">
- 	var images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg'];
- 	$('<img class="image-wrap" src="images/' + images[Math.floor(Math.random() * images.length)] + '">').appendTo('#outfitImg').width(200).height(200);
- </script>
+<script type="text/javascript">
+$( document ).ready(function() {
+  // Randomize the image. To be changed to weather-appropriate image later.
+  var images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg'];
+ 	$('<img class="image-wrap" src="images/' + images[Math.floor(Math.random() * images.length)] + '">').appendTo('#outfitImg');
+});
+</script>
 
 </body>
 
