@@ -161,10 +161,10 @@
 		<p id="location">Current Location</p> 
 	</div>
 	<div data-role="content" id="fadeIn" class="content">
-		<h1>What's down for later today&#133;</h1>
+		<h2>What's down for later today&#133;</h2>
 		<p id="hourly_summary"class="icon" data-icon="B">Partly Cloudy</p>
-		<blockquote><h1><span id="advisor">WeatherWear</span>should be wearing today:</h1>
-		<p id="wearMessage"></p><p id="outfitImg" ></p><p>Or sport this: <br><span id="outfit" ></span> </p></p><h2>A little birdie once told me&#133;</h2><p id="hintMessage"></p></blockquote>
+		<aside><h1><span id="advisor">WeatherWear</span>should be wearing this today:</h1>
+		<p id="wearMessage"></p><p id="outfitImg" ></p><p>Or sport this: <br><span id="outfit" ></span> </p></p><h2>A little birdie once told me&#133;</h2><p id="hintMessage"></p></aside>
 	</div>
 </div>
 
@@ -188,6 +188,7 @@ $( document ).ready(function() {
 $( document ).ready(function() {
   // Randomize the image. To be changed to weather-appropriate image later.
   var images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg'];
+
  	$('<img class="image-wrap" src="images/' + images[Math.floor(Math.random() * images.length)] + '">').appendTo('#outfitImg');
 });
 </script>
